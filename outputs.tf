@@ -20,7 +20,7 @@ output "glue_catalog_databases_description" {
 }
 output "glue_catalog_databases_federated_database" {
   description = "Map of federated_database values across all glue_catalog_databases, keyed the same as var.glue_catalog_databases"
-  value       = { for k, v in aws_glue_catalog_database.glue_catalog_databases : k => v.federated_database if v.federated_database != null && length(v.federated_database) > 0 }
+  value       = { for k, v in aws_glue_catalog_database.glue_catalog_databases : k => one(v.federated_database) if v.federated_database != null && length(v.federated_database) > 0 }
 }
 output "glue_catalog_databases_location_uri" {
   description = "Map of location_uri values across all glue_catalog_databases, keyed the same as var.glue_catalog_databases"
@@ -48,6 +48,6 @@ output "glue_catalog_databases_tags_all" {
 }
 output "glue_catalog_databases_target_database" {
   description = "Map of target_database values across all glue_catalog_databases, keyed the same as var.glue_catalog_databases"
-  value       = { for k, v in aws_glue_catalog_database.glue_catalog_databases : k => v.target_database if v.target_database != null && length(v.target_database) > 0 }
+  value       = { for k, v in aws_glue_catalog_database.glue_catalog_databases : k => one(v.target_database) if v.target_database != null && length(v.target_database) > 0 }
 }
 
